@@ -51,6 +51,418 @@
         }
       ],
       "admin_note": "Overriding to Onside for testing purposes."
+    },
+    "e01ef5b3-f1f2-456e-abaa-93cf51dba33c": {
+      "id": "e01ef5b3-f1f2-456e-abaa-93cf51dba33c",
+      "match_id": "match-check-1777210113",
+      "team_id": "team-demo-001",
+      "type": "offside",
+      "status": "completed",
+      "event_ts": 62.1,
+      "frame_ts": 63.0,
+      "verdict": "Offside",
+      "confidence": 0.91,
+      "visual_type": "3d_offside_diagram",
+      "clip_window_sec": [
+        57.1,
+        67.1
+      ],
+      "clip_url": null,
+      "snapshot_url": "/storage/snapshots/e01ef5b3-f1f2-456e-abaa-93cf51dba33c.jpg",
+      "clip_deleted": true,
+      "note": "&lt;script&gt;alert(1)&lt;/script&gt; clean note",
+      "created_at": "2026-04-26T13:28:33.926307+00:00",
+      "created_at_ts": 1777210113.9263077,
+      "frame_reviewed_at_ts": 1777210115.985765,
+      "pending_verdict": "Offside",
+      "pending_confidence": 0.91,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:28:33.926307+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:28:35.985764+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:28:38.037197+00:00"
+        }
+      ],
+      "processing_error": "Clip extraction failed: invalid clip window"
+    },
+    "e466e199-30f9-4e39-90f7-ede61a1fd223": {
+      "id": "e466e199-30f9-4e39-90f7-ede61a1fd223",
+      "match_id": "match-check-1777210113",
+      "team_id": "team-demo-001",
+      "type": "goal",
+      "status": "completed",
+      "event_ts": 74.2,
+      "frame_ts": null,
+      "verdict": "No Goal",
+      "confidence": 0.84,
+      "visual_type": "goal_line_overlay",
+      "clip_window_sec": [
+        69.2,
+        79.2
+      ],
+      "clip_url": "/storage/clips/e466e199-30f9-4e39-90f7-ede61a1fd223.mp4",
+      "snapshot_url": "/storage/snapshots/e466e199-30f9-4e39-90f7-ede61a1fd223.jpg",
+      "clip_deleted": false,
+      "note": "",
+      "created_at": "2026-04-26T13:28:38.097481+00:00",
+      "created_at_ts": 1777210118.0985222,
+      "frame_reviewed_at_ts": null,
+      "pending_verdict": "No Goal",
+      "pending_confidence": 0.84,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:28:38.097481+00:00"
+        },
+        {
+          "status": "extracting_clip",
+          "at": "2026-04-26T13:28:40.401889+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:28:42.471121+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:28:44.551135+00:00"
+        }
+      ],
+      "processing_error": "Clip extraction failed: invalid clip window"
+    },
+    "5b56d7e5-cc5a-4a3e-85ce-1d134b0053b0": {
+      "id": "5b56d7e5-cc5a-4a3e-85ce-1d134b0053b0",
+      "match_id": "match-check-1777210247",
+      "team_id": "team-demo-001",
+      "type": "offside",
+      "status": "completed",
+      "event_ts": 62.1,
+      "frame_ts": 63.0,
+      "verdict": "Offside",
+      "confidence": 0.91,
+      "visual_type": "3d_offside_diagram",
+      "clip_window_sec": [
+        57.1,
+        67.1
+      ],
+      "clip_url": null,
+      "snapshot_url": "/storage/snapshots/5b56d7e5-cc5a-4a3e-85ce-1d134b0053b0.jpg",
+      "clip_deleted": true,
+      "note": "&lt;script&gt;alert(1)&lt;/script&gt; clean note",
+      "created_at": "2026-04-26T13:30:47.866340+00:00",
+      "created_at_ts": 1777210247.8663409,
+      "frame_reviewed_at_ts": 1777210249.9755988,
+      "pending_verdict": "Offside",
+      "pending_confidence": 0.91,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:30:47.866340+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:30:49.975598+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:30:52.028537+00:00"
+        }
+      ],
+      "processing_error": "Clip extraction failed: invalid clip window"
+    },
+    "54c815bf-6461-4330-9272-7a376dbd79ba": {
+      "id": "54c815bf-6461-4330-9272-7a376dbd79ba",
+      "match_id": "match-check-1777210247",
+      "team_id": "team-demo-001",
+      "type": "goal",
+      "status": "completed",
+      "event_ts": 74.2,
+      "frame_ts": null,
+      "verdict": "No Goal",
+      "confidence": 0.84,
+      "visual_type": "goal_line_overlay",
+      "clip_window_sec": [
+        69.2,
+        79.2
+      ],
+      "clip_url": "/storage/clips/54c815bf-6461-4330-9272-7a376dbd79ba.mp4",
+      "snapshot_url": "/storage/snapshots/54c815bf-6461-4330-9272-7a376dbd79ba.jpg",
+      "clip_deleted": false,
+      "note": "",
+      "created_at": "2026-04-26T13:30:52.163846+00:00",
+      "created_at_ts": 1777210252.163847,
+      "frame_reviewed_at_ts": null,
+      "pending_verdict": "No Goal",
+      "pending_confidence": 0.84,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:30:52.163846+00:00"
+        },
+        {
+          "status": "extracting_clip",
+          "at": "2026-04-26T13:30:54.584152+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:30:56.636656+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:30:58.683586+00:00"
+        }
+      ],
+      "processing_error": "Clip extraction failed: invalid clip window"
+    },
+    "fd8c8180-489d-4b80-b426-d39123d2a809": {
+      "id": "fd8c8180-489d-4b80-b426-d39123d2a809",
+      "match_id": "match-check-1777210282",
+      "team_id": "team-demo-001",
+      "type": "offside",
+      "status": "completed",
+      "event_ts": 1.2,
+      "frame_ts": 1.5,
+      "verdict": "Onside",
+      "confidence": 0.895,
+      "visual_type": "3d_offside_diagram",
+      "clip_window_sec": [
+        0,
+        6.2
+      ],
+      "clip_url": null,
+      "snapshot_url": "/storage/snapshots/fd8c8180-489d-4b80-b426-d39123d2a809.jpg",
+      "clip_deleted": true,
+      "note": "&lt;script&gt;alert(1)&lt;/script&gt; clean note",
+      "created_at": "2026-04-26T13:31:23.129438+00:00",
+      "created_at_ts": 1777210283.1294386,
+      "frame_reviewed_at_ts": 1777210285.5905695,
+      "pending_verdict": "Onside",
+      "pending_confidence": 0.895,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:31:23.129438+00:00"
+        },
+        {
+          "status": "extracting_clip",
+          "at": "2026-04-26T13:31:25.290230+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:31:25.590569+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:31:27.647555+00:00"
+        }
+      ]
+    },
+    "465c0439-8a2d-49b1-9cf4-611aa28bb50a": {
+      "id": "465c0439-8a2d-49b1-9cf4-611aa28bb50a",
+      "match_id": "match-check-1777210282",
+      "team_id": "team-demo-001",
+      "type": "goal",
+      "status": "completed",
+      "event_ts": 2.0,
+      "frame_ts": null,
+      "verdict": "No Goal",
+      "confidence": 0.83,
+      "visual_type": "goal_line_overlay",
+      "clip_window_sec": [
+        0,
+        7.0
+      ],
+      "clip_url": "/storage/clips/465c0439-8a2d-49b1-9cf4-611aa28bb50a.mp4",
+      "snapshot_url": "/storage/snapshots/465c0439-8a2d-49b1-9cf4-611aa28bb50a.jpg",
+      "clip_deleted": false,
+      "note": "",
+      "created_at": "2026-04-26T13:31:27.734944+00:00",
+      "created_at_ts": 1777210287.734944,
+      "frame_reviewed_at_ts": null,
+      "pending_verdict": "No Goal",
+      "pending_confidence": 0.83,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:31:27.734944+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:31:31.982557+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:31:34.043417+00:00"
+        }
+      ]
+    },
+    "0292521b-d52c-4d4c-bcc4-433e4bd4ac69": {
+      "id": "0292521b-d52c-4d4c-bcc4-433e4bd4ac69",
+      "match_id": "match-check-1777210597",
+      "team_id": "team-demo-001",
+      "type": "offside",
+      "status": "completed",
+      "event_ts": 1.2,
+      "frame_ts": 1.5,
+      "verdict": "Onside",
+      "confidence": 0.895,
+      "visual_type": "3d_offside_diagram",
+      "clip_window_sec": [
+        0,
+        6.2
+      ],
+      "clip_url": null,
+      "snapshot_url": "/storage/snapshots/0292521b-d52c-4d4c-bcc4-433e4bd4ac69.jpg",
+      "clip_deleted": true,
+      "note": "&lt;script&gt;alert(1)&lt;/script&gt; clean note",
+      "created_at": "2026-04-26T13:36:37.313871+00:00",
+      "created_at_ts": 1777210597.3153958,
+      "frame_reviewed_at_ts": 1777210598.9452026,
+      "pending_verdict": "Onside",
+      "pending_confidence": 0.895,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:36:37.313871+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:36:38.945202+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:36:40.984143+00:00"
+        }
+      ]
+    },
+    "94f61887-0f1e-4125-9661-c7e04967dcb9": {
+      "id": "94f61887-0f1e-4125-9661-c7e04967dcb9",
+      "match_id": "match-check-1777210597",
+      "team_id": "team-demo-001",
+      "type": "goal",
+      "status": "completed",
+      "event_ts": 2.0,
+      "frame_ts": null,
+      "verdict": "No Goal",
+      "confidence": 0.83,
+      "visual_type": "goal_line_overlay",
+      "clip_window_sec": [
+        0,
+        7.0
+      ],
+      "clip_url": "/storage/clips/94f61887-0f1e-4125-9661-c7e04967dcb9.mp4",
+      "snapshot_url": "/storage/snapshots/94f61887-0f1e-4125-9661-c7e04967dcb9.jpg",
+      "clip_deleted": false,
+      "note": "",
+      "created_at": "2026-04-26T13:36:41.107060+00:00",
+      "created_at_ts": 1777210601.1070604,
+      "frame_reviewed_at_ts": null,
+      "pending_verdict": "No Goal",
+      "pending_confidence": 0.83,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:36:41.107060+00:00"
+        },
+        {
+          "status": "extracting_clip",
+          "at": "2026-04-26T13:36:43.816592+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:36:45.869954+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:36:47.894996+00:00"
+        }
+      ]
+    },
+    "e9b52f6b-dd25-47bf-9a5d-e698c5e2c60b": {
+      "id": "e9b52f6b-dd25-47bf-9a5d-e698c5e2c60b",
+      "match_id": "match-demo-001",
+      "team_id": "team-demo-001",
+      "type": "offside",
+      "status": "completed",
+      "event_ts": 125.4,
+      "frame_ts": 126.8,
+      "verdict": "Offside",
+      "confidence": 0.92,
+      "visual_type": "3d_offside_diagram",
+      "clip_window_sec": [
+        120.4,
+        130.4
+      ],
+      "clip_url": "/storage/clips/e9b52f6b-dd25-47bf-9a5d-e698c5e2c60b.mp4",
+      "snapshot_url": "/storage/snapshots/e9b52f6b-dd25-47bf-9a5d-e698c5e2c60b.jpg",
+      "clip_deleted": false,
+      "note": "",
+      "created_at": "2026-04-26T13:39:21.263938+00:00",
+      "created_at_ts": 1777210761.2639382,
+      "frame_reviewed_at_ts": 1777210811.6320462,
+      "pending_verdict": "Offside",
+      "pending_confidence": 0.92,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:39:21.263938+00:00"
+        },
+        {
+          "status": "awaiting_frame_selection",
+          "at": "2026-04-26T13:40:06.230798+00:00"
+        },
+        {
+          "status": "ai_analyzing",
+          "at": "2026-04-26T13:40:11.632046+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:40:14.452716+00:00"
+        }
+      ],
+      "processing_error": "Clip extraction failed: invalid clip window"
+    },
+    "83642fe2-0343-4a7a-8fd1-33c063eb46a0": {
+      "id": "83642fe2-0343-4a7a-8fd1-33c063eb46a0",
+      "match_id": "match-demo-001",
+      "team_id": "team-demo-001",
+      "type": "goal",
+      "status": "completed",
+      "event_ts": 125.4,
+      "frame_ts": null,
+      "verdict": "Goal",
+      "confidence": 0.8799999999999999,
+      "visual_type": "goal_line_overlay",
+      "clip_window_sec": [
+        120.4,
+        130.4
+      ],
+      "clip_url": "/storage/clips/83642fe2-0343-4a7a-8fd1-33c063eb46a0.mp4",
+      "snapshot_url": "/storage/snapshots/83642fe2-0343-4a7a-8fd1-33c063eb46a0.jpg",
+      "clip_deleted": false,
+      "note": "",
+      "created_at": "2026-04-26T13:39:22.285100+00:00",
+      "created_at_ts": 1777210762.2851007,
+      "frame_reviewed_at_ts": null,
+      "pending_verdict": "Goal",
+      "pending_confidence": 0.8799999999999999,
+      "processing_history": [
+        {
+          "status": "queued",
+          "at": "2026-04-26T13:39:22.285100+00:00"
+        },
+        {
+          "status": "completed",
+          "at": "2026-04-26T13:40:08.544803+00:00"
+        }
+      ],
+      "processing_error": "Clip extraction failed: invalid clip window"
     }
   },
   "matches": {
@@ -60,10 +472,11 @@
       "source_type": "upload",
       "source_label": "uploaded_video.mp4",
       "status": "active",
-      "updated_at": "2026-04-25T16:54:57.139144+00:00",
-      "incident_count": 1,
-      "offside_count": 1,
-      "goal_count": 0
+      "live_source_status": "disconnected",
+      "live_stream_url": null,
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 0,
+      "updated_at": "2026-04-26T15:58:15.860898+00:00"
     },
     "match-test-002": {
       "id": "match-test-002",
@@ -72,6 +485,226 @@
       "source_label": "uploaded_video.mp4",
       "status": "active",
       "updated_at": "2026-04-25T16:47:40.628758+00:00",
+      "incident_count": 0,
+      "offside_count": 0,
+      "goal_count": 0
+    },
+    "match-check-1777210052": {
+      "id": "match-check-1777210052",
+      "team_id": "team-demo-001",
+      "source_type": "upload",
+      "source_label": "check_upload.mp4",
+      "status": "active",
+      "live_source_status": "disconnected",
+      "live_stream_url": null,
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 0,
+      "updated_at": "2026-04-26T13:27:32.147709+00:00",
+      "incident_count": 0,
+      "offside_count": 0,
+      "goal_count": 0
+    },
+    "match-check-1777210052-live": {
+      "id": "match-check-1777210052-live",
+      "team_id": "team-demo-001",
+      "source_type": "live",
+      "source_label": "rtmp://camera/live",
+      "status": "active",
+      "live_source_status": "connected",
+      "live_stream_url": "rtmp://camera/live",
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 2,
+      "updated_at": "2026-04-26T13:27:32.443434+00:00",
+      "incident_count": 0,
+      "offside_count": 0,
+      "goal_count": 0
+    },
+    "match-check-1777210075": {
+      "id": "match-check-1777210075",
+      "team_id": "team-demo-001",
+      "source_type": "upload",
+      "source_label": "check_upload.mp4",
+      "status": "active",
+      "live_source_status": "disconnected",
+      "live_stream_url": null,
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 0,
+      "updated_at": "2026-04-26T13:27:55.858814+00:00",
+      "incident_count": 0,
+      "offside_count": 0,
+      "goal_count": 0
+    },
+    "match-check-1777210075-live": {
+      "id": "match-check-1777210075-live",
+      "team_id": "team-demo-001",
+      "source_type": "live",
+      "source_label": "rtmp://camera/live",
+      "status": "active",
+      "live_source_status": "connected",
+      "live_stream_url": "rtmp://camera/live",
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 2,
+      "updated_at": "2026-04-26T13:27:56.265805+00:00",
+      "incident_count": 0,
+      "offside_count": 0,
+      "goal_count": 0
+    },
+    "match-check-1777210113": {
+      "id": "match-check-1777210113",
+      "team_id": "team-demo-001",
+      "source_type": "upload",
+      "source_label": "checker_sample.mp4",
+      "status": "active",
+      "live_source_status": "disconnected",
+      "live_stream_url": null,
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 0,
+      "updated_at": "2026-04-26T13:28:33.908199+00:00",
+      "source_file_name": "match-check-1777210113_checker_sample.mp4",
+      "source_metadata": {
+        "file_size_bytes": 5441,
+        "file_size_mb": 0.01,
+        "duration_sec": 3.0,
+        "width": 1280,
+        "height": 720,
+        "fps": 24.0,
+        "extension": ".mp4"
+      },
+      "incident_count": 2,
+      "offside_count": 1,
+      "goal_count": 1
+    },
+    "match-check-1777210113-live": {
+      "id": "match-check-1777210113-live",
+      "team_id": "team-demo-001",
+      "source_type": "live",
+      "source_label": "rtmp://camera/live",
+      "status": "active",
+      "live_source_status": "connected",
+      "live_stream_url": "rtmp://camera/live",
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 2,
+      "updated_at": "2026-04-26T13:28:44.631761+00:00",
+      "incident_count": 0,
+      "offside_count": 0,
+      "goal_count": 0
+    },
+    "match-check-1777210247": {
+      "id": "match-check-1777210247",
+      "team_id": "team-demo-001",
+      "source_type": "upload",
+      "source_label": "checker_sample.mp4",
+      "status": "active",
+      "live_source_status": "disconnected",
+      "live_stream_url": null,
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 0,
+      "updated_at": "2026-04-26T13:30:47.843815+00:00",
+      "source_file_name": "match-check-1777210247_checker_sample.mp4",
+      "source_metadata": {
+        "file_size_bytes": 5441,
+        "file_size_mb": 0.01,
+        "duration_sec": 3.0,
+        "width": 1280,
+        "height": 720,
+        "fps": 24.0,
+        "extension": ".mp4"
+      },
+      "incident_count": 2,
+      "offside_count": 1,
+      "goal_count": 1
+    },
+    "match-check-1777210247-live": {
+      "id": "match-check-1777210247-live",
+      "team_id": "team-demo-001",
+      "source_type": "live",
+      "source_label": "rtmp://camera/live",
+      "status": "active",
+      "live_source_status": "connected",
+      "live_stream_url": "rtmp://camera/live",
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 2,
+      "updated_at": "2026-04-26T13:30:58.762450+00:00",
+      "incident_count": 0,
+      "offside_count": 0,
+      "goal_count": 0
+    },
+    "match-check-1777210282": {
+      "id": "match-check-1777210282",
+      "team_id": "team-demo-001",
+      "source_type": "upload",
+      "source_label": "checker_sample.mp4",
+      "status": "active",
+      "live_source_status": "disconnected",
+      "live_stream_url": null,
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 0,
+      "updated_at": "2026-04-26T13:31:23.094989+00:00",
+      "source_file_name": "match-check-1777210282_checker_sample.mp4",
+      "source_metadata": {
+        "file_size_bytes": 5441,
+        "file_size_mb": 0.01,
+        "duration_sec": 3.0,
+        "width": 1280,
+        "height": 720,
+        "fps": 24.0,
+        "extension": ".mp4"
+      },
+      "incident_count": 2,
+      "offside_count": 1,
+      "goal_count": 1
+    },
+    "match-check-1777210282-live": {
+      "id": "match-check-1777210282-live",
+      "team_id": "team-demo-001",
+      "source_type": "live",
+      "source_label": "rtmp://camera/live",
+      "status": "active",
+      "live_source_status": "connected",
+      "live_stream_url": "rtmp://camera/live",
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 2,
+      "updated_at": "2026-04-26T13:31:34.141365+00:00",
+      "incident_count": 0,
+      "offside_count": 0,
+      "goal_count": 0
+    },
+    "match-check-1777210597": {
+      "id": "match-check-1777210597",
+      "team_id": "team-demo-001",
+      "source_type": "upload",
+      "source_label": "checker_sample.mp4",
+      "status": "active",
+      "live_source_status": "disconnected",
+      "live_stream_url": null,
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 0,
+      "updated_at": "2026-04-26T13:36:37.291800+00:00",
+      "source_file_name": "match-check-1777210597_checker_sample.mp4",
+      "source_metadata": {
+        "file_size_bytes": 5441,
+        "file_size_mb": 0.01,
+        "duration_sec": 3.0,
+        "width": 1280,
+        "height": 720,
+        "fps": 24.0,
+        "extension": ".mp4"
+      },
+      "incident_count": 2,
+      "offside_count": 1,
+      "goal_count": 1
+    },
+    "match-check-1777210597-live": {
+      "id": "match-check-1777210597-live",
+      "team_id": "team-demo-001",
+      "source_type": "live",
+      "source_label": "rtmp://camera/live",
+      "status": "active",
+      "live_source_status": "connected",
+      "live_stream_url": "rtmp://camera/live",
+      "live_buffer_seconds": 30,
+      "live_reconnect_count": 2,
+      "updated_at": "2026-04-26T13:36:48.003278+00:00",
       "incident_count": 0,
       "offside_count": 0,
       "goal_count": 0

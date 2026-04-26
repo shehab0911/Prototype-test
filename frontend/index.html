@@ -146,29 +146,198 @@
             </div>
           </section>
 
-          <!-- ===== MATCH HISTORY ===== -->
-          <section id="screen-match-history" class="screen hidden">
-            <div class="panel">
-              <div class="panel-header">
-                <h3>Match History</h3>
-                <div class="row" style="gap:8px">
-                  <input type="text" placeholder="Search matches..." style="max-width:200px;" />
-                  <select style="max-width:140px;"><option>All Types</option><option>Offside</option><option>Goal</option></select>
+          <!-- ===== MY ASSIGNMENTS ===== -->
+          <section id="screen-my-assignments" class="screen hidden">
+            <div class="panel" style="padding:0; overflow:hidden;">
+              <div class="panel-header" style="padding:20px; border-bottom:1px solid var(--border-subtle);">
+                <div class="row" style="gap:16px;">
+                  <button class="btn-primary" style="border-radius:20px; padding:6px 16px;">All</button>
+                  <button class="secondary" style="border-radius:20px; padding:6px 16px; border:none; background:transparent;">Upcoming</button>
+                  <button class="secondary" style="border-radius:20px; padding:6px 16px; border:none; background:transparent;">Live</button>
+                  <button class="secondary" style="border-radius:20px; padding:6px 16px; border:none; background:transparent;">Completed</button>
+                </div>
+                <div class="row" style="gap:12px;">
+                  <input type="date" style="padding:8px 12px; border-radius:var(--radius-md); background:var(--bg-input); border:1px solid var(--border-subtle); color:var(--text-primary);" />
+                  <div class="search-bar" style="max-width:250px;">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Search teams, venues..." />
+                  </div>
                 </div>
               </div>
-              <table class="table">
+              <table class="table" style="margin-bottom:0;">
                 <thead>
                   <tr>
-                    <th>Date</th>
-                    <th>Fixture</th>
+                    <th>Kickoff Time</th>
+                    <th>Match</th>
+                    <th>Competition</th>
+                    <th>Venue</th>
+                    <th>Role</th>
                     <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="myAssignmentsTable"></tbody>
+              </table>
+              <div class="pagination" style="padding:16px 20px;">
+                <span class="pagination-info">Showing 1 to 4 of 24 assignments</span>
+                <div class="pagination-buttons">
+                  <button class="page-btn">‹</button>
+                  <button class="page-btn active">1</button>
+                  <button class="page-btn">2</button>
+                  <button class="page-btn">3</button>
+                  <button class="page-btn">›</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== MATCH OFFICIALS (Admin) ===== -->
+          <section id="screen-match-officials" class="screen hidden">
+            <div class="row-between" style="margin-bottom:16px;">
+              <h3 style="margin:0;">Match Officials</h3>
+              <div class="row" style="gap:12px;">
+                <select style="background:transparent; border:none; color:var(--text-secondary); font-size:0.85rem;"><option>All Status</option></select>
+                <select style="background:transparent; border:none; color:var(--text-secondary); font-size:0.85rem;"><option>All Leagues</option></select>
+                <button class="btn-primary" style="padding:8px 16px; font-size:0.85rem;">+ Add New Official</button>
+              </div>
+            </div>
+            <div class="row-between" style="margin-bottom:16px;">
+              <div class="row" style="gap:12px;">
+                <div class="search-bar" style="width:250px;">
+                  <span class="search-icon">🔍</span>
+                  <input type="text" placeholder="Search officials..." />
+                </div>
+                <div style="width:80px;height:36px;background:var(--bg-input);border:1px solid var(--border-subtle);border-radius:var(--radius-md);"></div>
+                <div style="width:80px;height:36px;background:var(--bg-input);border:1px solid var(--border-subtle);border-radius:var(--radius-md);"></div>
+              </div>
+              <div class="row" style="gap:12px;">
+                <button class="secondary" style="font-size:0.82rem;">▤ Columns</button>
+                <button class="secondary" style="font-size:0.82rem;">⬇ Export</button>
+              </div>
+            </div>
+            <div class="panel" style="padding:0; overflow:hidden;">
+              <table class="table" style="margin-bottom:0;">
+                <thead>
+                  <tr>
+                    <th style="width:30px;"><div class="checkbox"></div></th>
+                    <th>Name</th>
+                    <th>Role/Level</th>
+                    <th>Certification</th>
+                    <th>Background Check</th>
+                    <th>Availability</th>
+                    <th>Assigned Leagues</th>
+                    <th>Matches</th>
+                    <th>Last Active</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="matchOfficialsTable"></tbody>
+              </table>
+              <div class="pagination" style="padding:16px 20px;">
+                <span class="pagination-info">Showing 1 to 10 of 47 officials</span>
+                <div class="pagination-buttons">
+                  <button class="page-btn" style="padding:6px 12px;">Previous</button>
+                  <button class="page-btn active">1</button>
+                  <button class="page-btn">2</button>
+                  <button class="page-btn">3</button>
+                  <button class="page-btn" style="padding:6px 12px;">Next</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== TEAM DETAIL (Admin) ===== -->
+          <section id="screen-team-detail" class="screen hidden">
+            <div id="teamDetailContent"></div>
+          </section>
+
+          <!-- ===== OFFICIAL DETAIL (Admin) ===== -->
+          <section id="screen-official-detail" class="screen hidden">
+            <div id="officialDetailContent"></div>
+          </section>
+
+          <!-- ===== MATCH HISTORY ===== -->
+          <section id="screen-match-history" class="screen hidden">
+            <div class="row-between" style="margin-bottom:16px;">
+              <div class="search-bar" style="max-width:300px;">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search leagues, matches, teams..." />
+              </div>
+              <div class="btn-group">
+                <button class="btn-primary" style="background:var(--accent-primary);">+ Create Match</button>
+                <button class="btn-primary" style="background:var(--accent-purple);"><span style="font-size:1.1rem;">(T)</span> Connect Live Stream</button>
+              </div>
+            </div>
+            <div class="advanced-filters">
+              <div class="row" style="gap:12px;width:100%;justify-content:space-between;align-items:flex-end;">
+                <div class="row" style="gap:16px;flex:1;">
+                  <div class="filter-item">
+                    <label>Date Range</label>
+                    <div class="row" style="gap:8px;">
+                      <input type="date" style="max-width:140px;" /> <span style="color:var(--text-muted);font-size:0.8rem;">to</span> <input type="date" style="max-width:140px;" />
+                    </div>
+                  </div>
+                  <div class="filter-item">
+                    <label>Match Status</label>
+                    <select><option>All Statuses</option></select>
+                  </div>
+                  <div class="filter-item">
+                    <label>Video Status</label>
+                    <select><option>All Video Statuses</option></select>
+                  </div>
+                  <div class="filter-item">
+                    <label>AI Review Status</label>
+                    <select><option>All Review Statuses</option></select>
+                  </div>
+                </div>
+                <div class="row" style="gap:12px;">
+                  <div class="filter-item" style="flex:1;">
+                    <label>Search by teams, venue, or officials...</label>
+                    <input type="text" placeholder="Type to search..." style="min-width:250px;" />
+                  </div>
+                  <button class="btn-primary" style="margin-top:24px;">Apply Filters</button>
+                  <button class="secondary" style="margin-top:24px;">Clear All</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row-between" style="margin-bottom:12px;">
+              <div class="row" style="gap:8px;">
+                <span style="font-size:0.82rem;color:var(--text-muted);">Sort by:</span>
+                <select style="max-width:120px;padding:6px 10px;"><option>Newest</option></select>
+              </div>
+              <div class="btn-group">
+                <button class="secondary" style="padding:6px 10px;">≣</button>
+                <button class="btn-primary" style="padding:6px 10px;">▤</button>
+              </div>
+            </div>
+
+            <div class="panel" style="padding:0;overflow:hidden;">
+              <table class="table" style="margin-bottom:0;">
+                <thead>
+                  <tr>
+                    <th>Kickoff</th>
+                    <th>Teams</th>
+                    <th>Venue</th>
+                    <th>Officials</th>
+                    <th>Video Source</th>
                     <th>Incidents</th>
-                    <th>Offside</th>
-                    <th>Goal</th>
+                    <th>AI Verdicts</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody id="historyTable"></tbody>
               </table>
+              <div class="pagination" style="padding:16px 20px;">
+                <span class="pagination-info">Showing 1-4 of 24 matches</span>
+                <div class="pagination-buttons">
+                  <button class="page-btn">‹</button>
+                  <button class="page-btn active">1</button>
+                  <button class="page-btn">2</button>
+                  <button class="page-btn">3</button>
+                  <button class="page-btn">›</button>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -235,6 +404,23 @@
                   <button id="filterGoalBtn" class="filter-btn">Goal</button>
                 </div>
               </div>
+              <div id="incidentsSummaryCards" class="stats-grid" style="display:none;margin-bottom:16px;"></div>
+              <div id="incidentsTableWrap" style="display:none;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Type</th>
+                      <th>Team/Player</th>
+                      <th>Description</th>
+                      <th>AI Verdict & Confidence</th>
+                      <th>Review Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="incidentsLogTableBody"></tbody>
+                </table>
+              </div>
               <ul id="incidentList" class="incident-list"></ul>
               <div id="incidentListEmpty" style="text-align:center;padding:40px 0;color:var(--text-muted);display:none;">
                 <p style="font-size:1.2rem;margin-bottom:8px;">No incidents yet</p>
@@ -250,6 +436,16 @@
 
           <!-- ===== LEAGUES (Admin) ===== -->
           <section id="screen-leagues" class="screen hidden">
+            <div class="row-between" style="margin-bottom:16px;">
+              <div class="search-bar" style="max-width:300px;">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search leagues by name..." />
+              </div>
+              <div class="btn-group">
+                <button class="btn-primary">+ New League</button>
+                <button class="secondary">⬇ Export</button>
+              </div>
+            </div>
             <div class="panel">
               <div class="panel-header">
                 <h3>All Leagues (12)</h3>
@@ -328,11 +524,6 @@
           <!-- ===== LEAGUE DETAIL FORM (Admin) ===== -->
           <section id="screen-league-detail" class="screen hidden">
             <div id="leagueDetailContent"></div>
-          </section>
-
-          <!-- ===== MATCH DETAIL / OFFICIAL DETAIL (Admin) ===== -->
-          <section id="screen-official-detail" class="screen hidden">
-            <div id="officialDetailContent"></div>
           </section>
 
         </main>

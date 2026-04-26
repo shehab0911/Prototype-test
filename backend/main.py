@@ -1,5 +1,7 @@
 import json
 import time
+import html
+import re
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Literal, Optional
@@ -23,6 +25,11 @@ app.add_middleware(
 
 
 BAD_WORDS = {"damn", "idiot", "stupid"}
+ALLOWED_VIDEO_EXTENSIONS = {".mp4", ".mov", ".mkv", ".webm", ".m4v"}
+MAX_UPLOAD_SIZE_MB = 1024
+MIN_VIDEO_WIDTH = 640
+MIN_VIDEO_HEIGHT = 360
+MAX_VIDEO_DURATION_SEC = 3 * 60 * 60
 INCIDENTS: dict[str, dict] = {}
 MATCHES: dict[str, dict] = {}
 LEAGUES: dict[str, dict] = {}
@@ -118,6 +125,63 @@ class ModerateIncident(BaseModel):
     note: Optional[str] = None
 
 
+class LiveSourceUpdate(BaseModel):
+    stream_url: str = Field(min_length=5)
+
+
+def _sanitize_text(value: str) -> str:
+    cleaned = re.sub(r"\s+", " ", value).strip()
+    return html.escape(cleaned, quote=True)
+
+
+def _validate_upload_metadata(file_name: str, content_bytes: bytes) -> dict:
+    suffix = Path(file_name).suffix.lower()
+    if suffix not in ALLOWED_VIDEO_EXTENSIONS:
+        raise HTTPException(status_code=400, detail="Unsupported file type. Use MP4 or equivalent video format")
+
+    file_size_bytes = len(content_bytes)
+    file_size_mb = file_size_bytes / (1024 * 1024)
+    if file_size_mb > MAX_UPLOAD_SIZE_MB:
+        raise HTTPException(status_code=400, detail=f"Video too large. Max size is {MAX_UPLOAD_SIZE_MB} MB")
+
+    duration_sec = 0.0
+    width = 0
+    height = 0
+    fps = 0.0
+    tmp_path = SOURCE_PATH / f"_validate_{uuid4()}_{Path(file_name).name}"
+    try:
+        tmp_path.write_bytes(content_bytes)
+        with VideoFileClip(str(tmp_path)) as video:
+            duration_sec = float(video.duration or 0.0)
+            width, height = video.size
+            fps = float(video.fps or 0.0)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid video file or unreadable video metadata")
+    finally:
+        if tmp_path.exists():
+            tmp_path.unlink()
+
+    if duration_sec <= 0:
+        raise HTTPException(status_code=400, detail="Invalid video duration")
+    if duration_sec > MAX_VIDEO_DURATION_SEC:
+        raise HTTPException(status_code=400, detail=f"Video duration exceeds limit ({MAX_VIDEO_DURATION_SEC}s)")
+    if width < MIN_VIDEO_WIDTH or height < MIN_VIDEO_HEIGHT:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Video resolution too low. Minimum is {MIN_VIDEO_WIDTH}x{MIN_VIDEO_HEIGHT}",
+        )
+
+    return {
+        "file_size_bytes": file_size_bytes,
+        "file_size_mb": round(file_size_mb, 2),
+        "duration_sec": round(duration_sec, 2),
+        "width": width,
+        "height": height,
+        "fps": round(fps, 2),
+        "extension": suffix,
+    }
+
+
 def _analyze_video_for_verdict(match: dict, incident: dict) -> dict:
     """Analyze video properties to make more intelligent verdict decisions"""
     source_file = _get_source_file(match)
@@ -127,7 +191,8 @@ def _analyze_video_for_verdict(match: dict, incident: dict) -> dict:
         'fps': 0,
         'size': (0, 0),
         'file_size_mb': 0,
-        'is_goal_video': False
+        'is_goal_video': False,
+        'source_file': ""
     }
 
     if source_file and source_file.exists():
@@ -142,6 +207,7 @@ def _analyze_video_for_verdict(match: dict, incident: dict) -> dict:
                 # Check if this looks like a goal video based on filename
                 if 'goal' in str(source_file).lower():
                     analysis['is_goal_video'] = True
+                analysis['source_file'] = str(source_file).lower()
 
         except Exception as e:
             print(f"Video analysis failed: {e}")
@@ -369,18 +435,16 @@ def _extract_snapshot_for_incident(match: dict, incident: dict) -> None:
     frame_ts = incident.get("frame_ts") or incident.get("event_ts", 0)
     
     try:
-        video = VideoFileClip(str(source_file))
-        # Clamp the timestamp to valid range
-        frame_ts = min(max(frame_ts, 0), video.duration - 0.01)
-        frame = video.get_frame(frame_ts)
-        
-        # Save frame as JPEG
-        from imageio import imwrite
-        imwrite(str(snapshot_path), frame)
-        video.close()
+        with VideoFileClip(str(source_file)) as video:
+            # Clamp the timestamp to valid range
+            frame_ts = min(max(frame_ts, 0), video.duration - 0.01)
+            frame = video.get_frame(frame_ts)
+            # Save frame as JPEG
+            from imageio import imwrite
+            imwrite(str(snapshot_path), frame)
         incident["snapshot_url"] = f"/storage/snapshots/{incident['id']}.jpg"
     except Exception as exc:
-        print(f"Snapshot extraction failed for {incident['id']}: {exc}")
+        incident["processing_error"] = f"Snapshot extraction failed: {exc}"
 
 
 def _extract_clip_for_incident(match: dict, incident: dict) -> None:
@@ -391,18 +455,21 @@ def _extract_clip_for_incident(match: dict, incident: dict) -> None:
     clip_path = CLIPS_PATH / f"{incident['id']}.mp4"
     clip_start, clip_end = incident["clip_window_sec"]
     try:
-        video = VideoFileClip(str(source_file))
-        clip_end = min(clip_end, video.duration)
-        if clip_start >= clip_end:
-            video.close()
-            return
-        clip = video.subclipped(clip_start, clip_end)
-        # Write video file with updated MoviePy API
-        clip.write_videofile(str(clip_path), codec="libx264")
-        video.close()
+        with VideoFileClip(str(source_file)) as video:
+            clip_end = min(clip_end, video.duration)
+            if clip_start >= clip_end:
+                incident["processing_error"] = "Clip extraction failed: invalid clip window"
+                return
+            if hasattr(video, "subclipped"):
+                clip = video.subclipped(clip_start, clip_end)
+            else:
+                clip = video.subclip(clip_start, clip_end)
+            # Write video file with updated MoviePy API
+            clip.write_videofile(str(clip_path), codec="libx264", audio=False, logger=None)
+            clip.close()
         incident["clip_url"] = _build_clip_url(incident["id"])
     except Exception as exc:
-        print(f"Clip extraction failed for {incident['id']}: {exc}")
+        incident["processing_error"] = f"Clip extraction failed: {exc}"
 
 
 @app.get("/health")
@@ -434,8 +501,12 @@ def create_or_update_match(
         "id": match_id,
         "team_id": team_id,
         "source_type": payload.source_type,
-        "source_label": payload.source_label,
+        "source_label": _sanitize_text(payload.source_label),
         "status": "active",
+        "live_source_status": "disconnected",
+        "live_stream_url": None,
+        "live_buffer_seconds": 30,
+        "live_reconnect_count": 0,
         "updated_at": now,
     }
     MATCHES[match_id] = match
@@ -525,14 +596,68 @@ async def upload_match_source(
     upload_name = f"{match_id}_{file.filename}"
     dest = SOURCE_PATH / upload_name
     contents = await file.read()
+    metadata = _validate_upload_metadata(file.filename, contents)
     dest.write_bytes(contents)
     match["source_file_name"] = upload_name
-    match["source_label"] = file.filename
+    match["source_label"] = _sanitize_text(file.filename)
+    match["source_metadata"] = metadata
+    match["updated_at"] = datetime.now(timezone.utc).isoformat()
     _persist_data()
     return {
         "message": "Uploaded match source.",
         "source_file": upload_name,
         "source_url": f"/storage/source/{upload_name}",
+        "metadata": metadata,
+    }
+
+
+@app.post("/api/matches/{match_id}/live/connect")
+def connect_live_source(
+    match_id: str,
+    payload: LiveSourceUpdate,
+    x_role: str | None = Header(default=None),
+    x_team_id: str | None = Header(default=None),
+) -> dict:
+    _require_role(x_role, {"league_admin", "match_official"})
+    team_id = _require_team(x_team_id)
+    match = _require_match_access(match_id, team_id)
+    if match["source_type"] != "live":
+        raise HTTPException(status_code=400, detail="Match source is not live")
+    if not (payload.stream_url.startswith("rtmp://") or payload.stream_url.startswith("http://") or payload.stream_url.startswith("https://")):
+        raise HTTPException(status_code=400, detail="Invalid live stream URL. Use RTMP/HLS URL")
+    reconnect = 1 if match.get("live_source_status") == "disconnected" else 0
+    match["live_stream_url"] = payload.stream_url
+    match["live_source_status"] = "connected"
+    match["live_reconnect_count"] = int(match.get("live_reconnect_count", 0)) + reconnect
+    match["updated_at"] = datetime.now(timezone.utc).isoformat()
+    _persist_data()
+    return {
+        "match_id": match_id,
+        "status": match["live_source_status"],
+        "buffer_seconds": match["live_buffer_seconds"],
+        "reconnect_count": match["live_reconnect_count"],
+    }
+
+
+@app.post("/api/matches/{match_id}/live/disconnect")
+def disconnect_live_source(
+    match_id: str,
+    x_role: str | None = Header(default=None),
+    x_team_id: str | None = Header(default=None),
+) -> dict:
+    _require_role(x_role, {"league_admin", "match_official"})
+    team_id = _require_team(x_team_id)
+    match = _require_match_access(match_id, team_id)
+    if match["source_type"] != "live":
+        raise HTTPException(status_code=400, detail="Match source is not live")
+    match["live_source_status"] = "disconnected"
+    match["updated_at"] = datetime.now(timezone.utc).isoformat()
+    _persist_data()
+    return {
+        "match_id": match_id,
+        "status": match["live_source_status"],
+        "buffer_seconds": match["live_buffer_seconds"],
+        "reconnect_count": match["live_reconnect_count"],
     }
 
 
@@ -611,7 +736,10 @@ def create_league(payload: LeagueCreate, x_role: str | None = Header(default=Non
     _require_role(x_role, {"league_admin"})
     l_id = str(uuid4())
     now = datetime.now(timezone.utc).isoformat()
-    league = {"id": l_id, "created_at": now, **payload.model_dump()}
+    clean_payload = payload.model_dump()
+    clean_payload["name"] = _sanitize_text(clean_payload["name"])
+    clean_payload["description"] = _sanitize_text(clean_payload["description"])
+    league = {"id": l_id, "created_at": now, **clean_payload}
     LEAGUES[l_id] = league
     _persist_data()
     return league
@@ -632,7 +760,10 @@ def create_team(payload: TeamCreate, x_role: str | None = Header(default=None)) 
     _require_role(x_role, {"league_admin"})
     t_id = str(uuid4())
     now = datetime.now(timezone.utc).isoformat()
-    team = {"id": t_id, "created_at": now, **payload.model_dump()}
+    clean_payload = payload.model_dump()
+    clean_payload["name"] = _sanitize_text(clean_payload["name"])
+    clean_payload["contact"] = _sanitize_text(clean_payload["contact"])
+    team = {"id": t_id, "created_at": now, **clean_payload}
     TEAMS[t_id] = team
     _persist_data()
     return team
@@ -716,7 +847,7 @@ def update_note(
     if any(bad_word in note_lower for bad_word in BAD_WORDS):
         raise HTTPException(status_code=400, detail="Note contains disallowed language")
 
-    incident["note"] = payload.note
+    incident["note"] = _sanitize_text(payload.note)
     _persist_data()
     return incident
 
@@ -733,6 +864,9 @@ def delete_clip(
     if incident["team_id"] != team_id:
         raise HTTPException(status_code=403, detail="No access to this incident")
 
+    clip_file = CLIPS_PATH / f"{incident_id}.mp4"
+    if clip_file.exists():
+        clip_file.unlink()
     incident["clip_deleted"] = True
     incident["clip_url"] = None
     _persist_data()

@@ -92,6 +92,20 @@ docker compose down
 
 - Live stream ingest, CV model inference, and real 3D rendering are represented as simulated steps in this prototype.
 - Full production behavior is documented in `TECHNICAL_SCOPE_AND_PLAN.md`.
+- A full mock compliance checker is available at `backend/mock_ai_functionality_check.py` to validate role permissions, incident flows, notes, download/delete behavior, live source transitions, and team isolation.
+
+## Run automated mock functionality check
+
+1. Start backend (`uvicorn main:app --reload`) from `prototype/backend`.
+2. Ensure `prototype/test.mp4` exists (used as upload sample).
+3. Run:
+
+```bash
+cd prototype/backend
+python mock_ai_functionality_check.py
+```
+
+The script prints `PASS/FAIL` per functionality and exits non-zero if any check fails.
 
 ## System Architecture / User Flow
 
