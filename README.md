@@ -1,4 +1,5 @@
-# Atletico Intelligence Prototype
+# Atletico Intelligence -- AI-Powered Soccer 
+Incident Review
 
 ## Project Structure
 
